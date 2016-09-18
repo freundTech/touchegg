@@ -72,6 +72,9 @@ SendKeys::SendKeys(const QString &settings, const QString &timing, Window window
 void SendKeys::executeStart(const QHash<QString, QVariant>& /*attrs*/) {
     if (at_start) {
         sendKeys();
+		if (!during) {
+			releaseKeys();
+		}
     }
 }
 
@@ -80,7 +83,11 @@ void SendKeys::executeUpdate(const QHash<QString, QVariant>& /*attrs*/) {}
 void SendKeys::executeFinish(const QHash<QString, QVariant>& /*attrs*/) {
     if (!at_start) {
         sendKeys();
+		releaseKeys();
     }
+	if (during) {
+		releaseKeys();
+	}
 }
 
 void SendKeys::sendKeys() {
@@ -91,8 +98,10 @@ void SendKeys::sendKeys() {
     for (int n = 0; n < this->pressBetweenKeys.length(); n++) {
         XTestFakeKeyEvent(QX11Info::display(), this->pressBetweenKeys.at(n), true, 0);
         XTestFakeKeyEvent(QX11Info::display(), this->pressBetweenKeys.at(n), false, 0);
-    }
+    }	
+}
 
+void SendKeys::releaseKeys() {
     for (int n = 0; n < this->holdDownKeys.length(); n++) {
         XTestFakeKeyEvent(QX11Info::display(), this->holdDownKeys.at(n), false, 0);
     }

@@ -45,6 +45,7 @@ protected:
      * Helper method to actually send the keys.
      */
     void sendKeys();
+    void releaseKeys();
 
     /**
      * Keys to hold down while sending the rest of keys.

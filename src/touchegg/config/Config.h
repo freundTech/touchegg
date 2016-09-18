@@ -97,7 +97,7 @@ public:
      * @param  gestureType The gesture that is made.
      * @param  numFingers Number of fingers used by the gesture.
      * @param  dir Direction of the gesture.
-     * @return The timing information, either "AT_START" or "AT_END".
+     * @return The timing information, either "AT_START", "AT_END" or "DURING".
      */
     QString getAssociatedTiming(const QString &appClass,
             GestureTypeEnum::GestureType gestureType, int numFingers,

@@ -41,7 +41,8 @@ public:
         : settings(settings),
           window(window) {
 
-        at_start = false;     
+        at_start = false;
+		during = false;
     }
 
     virtual ~Action() {}
@@ -58,7 +59,10 @@ public:
     
         if (timing == "AT_START") {
             at_start = true;
-        } else {
+        } else if (timing == "DURING") {
+			at_start = true;
+			during = true;
+		} else {
             at_start = false;
         }
     }
@@ -95,6 +99,8 @@ protected:
      * Timing information (only applies to certain actions).
      */
     bool at_start;
+
+	bool during;
 
     /**
      * Window on which execute the action.

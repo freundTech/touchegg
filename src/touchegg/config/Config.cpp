@@ -179,7 +179,7 @@ void Config::initConfig(QFile &file)
                         action = actNode.toElement().attribute("type");
                         timing = actNode.toElement().attribute("when");
                         // By default, perform the action at the end. 
-                        if (timing != "AT_START" && timing != "AT_END") {
+                        if (timing != "AT_START" && timing != "AT_END" && timing != "DURING") {
                             timing = "AT_END";
                         }
                     }
